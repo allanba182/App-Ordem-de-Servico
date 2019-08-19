@@ -105,7 +105,7 @@
             $arquivo['name'] = 'OS_' . $_POST['id_os'] . '_' . $_POST['data_abertura'];
             
             //Diretório onde o arquivo vai ser salvo
-            $diretorio = './OS/' . $_POST['tipo'] . '/' . $_POST['serie'] . '/';
+            $diretorio = '../../OS/' . $_POST['tipo'] . '/' . $_POST['serie'] . '/';
 
             print($diretorio);
 
