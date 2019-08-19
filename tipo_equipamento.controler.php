@@ -16,8 +16,10 @@
         $tipoEquipamentoService->inserir();
 
         //CRIANDO PASTA REFERENTE AO TIPO CADASTRADO NO BANCO
-        $_UP['pasta'] = './OS/' . $tipoEquipamento->__get('tipo') . '/';
-        mkdir($_UP['pasta'], 0777);
+        $_UP['pasta'] = '../../OS/' . $tipoEquipamento->__get('tipo') . '/';
+        mkdir($_UP['pasta'], 0777,true);
+        chmod($_UP['pasta'], 0777);
+
 
 
         //REDIRECIONANDO USUARIO PARA TELA DE CADASTRO DE TIPO

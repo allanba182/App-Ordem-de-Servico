@@ -28,12 +28,13 @@
         foreach ($tipoEquipamento as $key => $tipo) 
         {
             if( $tipo->id_tipo == $equipamento->__get('id_tipo') )
-                $tipo_equipamento->__set('tipo',$tipo->TIPO);
+                $tipo_equipamento->__set('tipo',$tipo->tipo);
         }
         
         //CRIANDO PASTA REFERENTE AO TIPO CADASTRADO NO BANCO
-        $_UP['pasta'] = './OS/' . $tipo_equipamento->__get('tipo') . '/' . $equipamento->__get('numero_serie') . '/';
-        mkdir($_UP['pasta'], 0777);
+        $_UP['pasta'] = '../../OS/' . $tipo_equipamento->__get('tipo') . '/' . $equipamento->__get('numero_serie') . '/';
+        mkdir($_UP['pasta'], 0777,true);
+        chmod($_UP['pasta'], 0777);
 
 
         //REDIRECIONANDO USUARIO PARA TELA DE CADASTRO DE TIPO
