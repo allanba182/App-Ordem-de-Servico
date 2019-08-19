@@ -6,6 +6,9 @@
         private $data_abertura;
         private $data_garantia;
         private $motivo;
+        private $reparos_realizados;
+        private $anexo;
+        private $id_status;
         private $id_equipamento;
         private $id_prestador;
         private $id_usuario;

@@ -54,7 +54,20 @@
 
         public function atualizar()
         {
+            // $query = 
+            // "
+            //     UPDATE tb_os (data_garantia,reparos_realizados,anexo,id_status) SET (:garantia,:reparos,:anexo,:id_status) WHERE id_os = :os
+            // ";
 
+            // $stmt = $this->conexao->prepare($query);
+
+            // $stmt->bindValue(':garantia',$this->ordem_servico->__get('data_garantia'));
+            // $stmt->bindValue(':reparos',$this->ordem_servico->__get('reparos_realizados'));
+            // $stmt->bindValue(':anexo',$this->ordem_servico->__get('anexo'));
+            // $stmt->bindValue(':id_status',$this->ordem_servico->__get('id_status'));
+            // $stmt->bindValue(':os',$this->ordem_servico->__get('id_os'));
+
+            // $stmt->execute();
         }
 
         public function remover()
