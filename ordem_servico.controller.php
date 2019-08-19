@@ -92,11 +92,23 @@
         /* O.S. PENDENTE */
         $osPendente = $osService->recuperarPendente();
 
+        /* O.S. EM GARANTIA DE SERVIÇO */
+        //$osGarantia = $osService->recuperarEmGarantia();
+
         
     }
 
     else if($acao == 'atualizar')
     {
+        $conexao = new Conexao();
+        $os = new OrdemServico();
+
+        $os->__set('id_status','2');
+        $os->__set('id_os',$_POST['id_os']);
+        $os->__set('data_garantia',$_POST['data_garantia']);
+        $os->__set('reparos_realizados',$_POST['reparos_realizados']);
+
+        
         $arquivo = $_FILES['anexo']['size'] > 0? $_FILES['anexo'] : FALSE;
 
         if($arquivo)
@@ -109,33 +121,19 @@
 
             //MOVE O ARQUIVO PARA O DIRETORIO
             move_uploaded_file($arquivo['tmp_name'], $diretorio.$arquivo['name']);
-
-            $conecao = new Conexao();
-            $os = new OrdemServico();
-
-            $os->__set('id_os',$_POST['id_os']);
-            $os->__set('data_garantia',$_POST['data_garantia']);
-            $os->__set('reparos_realizados',$_POST['reparos_realizados']);
-            $os->__set('anexo',$arquivo['name']);
-            $os->__set('id_status','2');
-
-            $osService = new OrdemServicoService($conexao,$os);
-            $osService->atualizar();
+ 
+            $os->__set('anexo',$arquivo['name']);        
         }
         else
-        {
-            $conecao = new Conexao();
-            $os = new OrdemServico();
-
-            $os->__set('id_os',$_POST['id_os']);
-            $os->__set('data_garantia',$_POST['data_garantia']);
-            $os->__set('reparos_realizados',$_POST['reparos_realizados']);
-            $os->__set('anexo',null);
-            $os->__set('id_status','2');
-
-            $osService = new OrdemServicoService($conexao,$os);
-            $osService->atualizar();
+        {            
+           $os->__set('anexo',null);
+                       
         }
+
+        $osService = new OrdemServicoService($conexao,$os);
+        $osService->atualizar();
+
+        header('Location: home.php');
             
     }
 ?>
