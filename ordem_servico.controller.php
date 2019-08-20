@@ -93,7 +93,7 @@
         $osPendente = $osService->recuperarPendente();
 
         /* O.S. EM GARANTIA DE SERVIÇO */
-        //$osGarantia = $osService->recuperarEmGarantia();
+        $osGarantia = $osService->recuperarEmGarantia();
 
         
     }
