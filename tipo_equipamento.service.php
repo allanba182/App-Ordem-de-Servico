@@ -40,7 +40,17 @@
 
         public function atualizar ()
         {
+            $query =
+            '
+                UPDATE tb_tipo_equipamento SET tipo = :tipo WHERE id_tipo = :id
+            ';
 
+            $stmt = $this->conexao->prepare($query);
+
+            $stmt->bindValue(':tipo', $this->tipoEquipamento->__get('tipo'));
+            $stmt->bindValue(':id', $this->tipoEquipamento->__get('id_tipo'));
+
+            $stmt->execute();
         }
 
         public function remover()
