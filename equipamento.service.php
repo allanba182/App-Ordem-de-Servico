@@ -60,7 +60,17 @@
 
         public function atualizar()
         {
+            $query = 
+            '
+                UPDATE tb_equipamento SET numero_serie = :serie WHERE id_equipamento = :id
+            ';
 
+            $stmt = $this->conexao->prepare($query);
+
+            $stmt->bindValue(':serie', $this->equipamento->__get('numero_serie'));
+            $stmt->bindValue(':id', $this->equipamento->__get('id_equipamento'));
+
+            $stmt->execute();
         }
 
         public function remover()

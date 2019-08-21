@@ -9,13 +9,14 @@
     require '../../app_ordem_servico/tipo_equipamento.model.php';
     require '../../app_ordem_servico/tipo_equipamento.service.php';
     
+    $conexao = new Conexao();
+    $equipamento = new Equipamento();
 
     $acao = isset($_GET['acao'])? $acao = $_GET['acao'] : $acao = $acao;
 
-    if($acao == 'inserir')
+    if( $acao == 'inserir')
     {
-        $conexao = new Conexao();
-        $equipamento = new Equipamento();
+
         $equipamento->__set('numero_serie', $_POST['serie']);
         $equipamento->__set('id_tipo', $_POST['tipo']);
 
@@ -43,10 +44,8 @@
         header('Location:form_cadastro.php?cadastro=equipamento&inclusao=1');
     }
 
-    else if($acao == 'recuperar')
+    else if( $acao == 'recuperar')
     {
-        $conexao = new Conexao();
-        $equipamento = new Equipamento();
 
         $equipamentoService = new EquipamentoService($conexao,$equipamento);
         $equipamentos = $equipamentoService->recuperar();
@@ -54,6 +53,19 @@
         $tipo = new TipoEquipamento();
         $tipoService = new TipoEquipamentoService($conexao, $tipo);
         $tipos = $tipoService->recuperar();
+    }
+
+    else if( $acao == 'atualizar')
+    {
+        print_r($_POST);
+        $equipamento->__set('id_equipamento', $_POST['id']);
+        $equipamento->__set('numero_serie', $_POST['numero_serie']);
+
+        $equipamentoService = new EquipamentoService($conexao,$equipamento);
+        $equipamentoService->atualizar();
+
+        header('Location:form_cadastro.php?cadastro=equipamento');
+
     }
 
 ?>
