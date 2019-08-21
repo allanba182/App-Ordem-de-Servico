@@ -22,26 +22,20 @@
             $stmt->bindValue(':fantasia', $this->prestador->__get('fantasia'));
             $stmt->execute();
 
-            $prestadores = $this->recuperar();
+            $this->prestador->__set('id_prestador', $this->conexao->lastInsertId());
 
-            foreach ($prestadores as $indice => $prestador) 
-            {
-                if($prestador->fantasia == $this->prestador->__get('fantasia'))
-                {
-                    $this->prestador->__set('id_prestador',$prestador->id_prestador);
-                }
-            }
             
-
             $query =
-            '
-                insert into tb_email_prestador(email,id_prestador) values (:email,:id)
-            ';
+            "
+                insert into tb_email_prestador(email,envia_email,id_prestador) values (:email,:enviar,:id)
+            ";
 
-            
             $stmt = $this->conexao->prepare($query);
+
             $stmt->bindValue(':email', $this->prestador->__get('email'));
+            $stmt->bindValue(':enviar', $this->prestador->__get('envia_email'));
             $stmt->bindValue(':id', $this->prestador->__get('id_prestador'));
+            
             $stmt->execute();
 
         }
@@ -50,7 +44,9 @@
         {
             $query =
             '
-                select * from tb_prestador
+                SELECT P.id_prestador, P.fantasia , E.id_email, E.email, E.envia_email
+                FROM tb_prestador P
+                LEFT JOIN tb_email_prestador E ON (P.id_prestador = E.id_prestador)
             ';
 
             $stmt = $this->conexao->prepare($query);

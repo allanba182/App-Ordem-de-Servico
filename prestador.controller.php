@@ -11,8 +11,12 @@
         $conexao = new Conexao();
         $prestador = new Prestador();
 
+        $envia_email = isset($_POST['envia_email'])? $envia_email = 'true' : $envia_email = 'false';
+        
         $prestador->__set('fantasia', $_POST['fantasia']);
         $prestador->__set('email', $_POST['email']);
+        $prestador->__set('envia_email', $envia_email);
+
 
         $prestadorService = new PrestadorService($conexao, $prestador);
         $prestadorService->inserir();
@@ -28,5 +32,6 @@
         $prestadorService = new PrestadorService($conexao, $prestador);
         
         $prestadores = $prestadorService->recuperar();
+
     }
 ?>

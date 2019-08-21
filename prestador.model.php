@@ -5,6 +5,7 @@
         private $id_prestador;
         private $fantasia;
         private $email;
+        private $envia_email;
 
         public function __get($atributo)
         {
