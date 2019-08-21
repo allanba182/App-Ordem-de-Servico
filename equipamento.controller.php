@@ -2,8 +2,10 @@
 
     $path = '../../app_ordem_servico/';
     require '../../app_ordem_servico/conexao.php';
+
     require '../../app_ordem_servico/equipamento.model.php';
     require '../../app_ordem_servico/equipamento.service.php';
+
     require '../../app_ordem_servico/tipo_equipamento.model.php';
     require '../../app_ordem_servico/tipo_equipamento.service.php';
     
@@ -39,6 +41,19 @@
 
         //REDIRECIONANDO USUARIO PARA TELA DE CADASTRO DE TIPO
         header('Location:form_cadastro.php?cadastro=equipamento&inclusao=1');
+    }
+
+    else if($acao == 'recuperar')
+    {
+        $conexao = new Conexao();
+        $equipamento = new Equipamento();
+
+        $equipamentoService = new EquipamentoService($conexao,$equipamento);
+        $equipamentos = $equipamentoService->recuperar();
+
+        $tipo = new TipoEquipamento();
+        $tipoService = new TipoEquipamentoService($conexao, $tipo);
+        $tipos = $tipoService->recuperar();
     }
 
 ?>

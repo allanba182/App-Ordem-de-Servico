@@ -29,6 +29,17 @@
 
         public function recuperar()
         {
+            $query =
+            '
+                SELECT E.id_equipamento, E.numero_serie, T.tipo 
+                FROM  tb_equipamento E
+                LEFT JOIN tb_tipo_equipamento T ON (E.id_tipo = T.id_tipo)
+            ';
+
+            $stmt = $this->conexao->prepare($query);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
 
         }
 

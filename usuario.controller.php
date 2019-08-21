@@ -61,4 +61,13 @@
 
     }
 
+    else if($acao == 'recuperar')
+    {
+        $conexao = new Conexao();
+        $usuario = new Usuario();
+
+        $usuarioService = new UsuarioService($conexao, $usuario);
+        $usuarios = $usuarioService->recuperar();
+    }
+
 ?>
