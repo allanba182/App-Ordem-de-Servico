@@ -39,9 +39,15 @@
         $tipoEquipamento->__set('id_tipo',$_POST['id']);
         $tipoEquipamento->__set('tipo',$_POST['tipo']);
         
+        /* ATUALIZAÇÃO DA TABELA NO BANCO */
         $tipoEquipamentoService = new TipoEquipamentoService($conexao, $tipoEquipamento);
-        
         $tipoEquipamentoService->atualizar();
+
+        /* ATUALIZAÇÃO DO DIRETORIO */
+        $nomeAntigo = '../../OS/' . $_POST['tipo_antigo'];
+        $nomeNovo = '../../OS/' . $tipoEquipamento->__get('tipo');
+
+        rename($nomeAntigo, $nomeNovo);
 
         header('Location: form_cadastro.php?cadastro=tipo');
     }

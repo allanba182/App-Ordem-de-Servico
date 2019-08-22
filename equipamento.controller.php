@@ -58,12 +58,18 @@
 
     else if( $acao == 'atualizar')
     {
-        print_r($_POST);
         $equipamento->__set('id_equipamento', $_POST['id']);
         $equipamento->__set('numero_serie', $_POST['numero_serie']);
 
+        /* ATUALIZAÇÃO DA TABELA NO BANCO */
         $equipamentoService = new EquipamentoService($conexao,$equipamento);
         $equipamentoService->atualizar();
+
+        /* ATUALIZAÇÃO DO DIRETORIO */
+        $nomeAntigo = '../../OS/' . $_POST['tipo'] . '/' . $_POST['numero_serie_antigo'];
+        $nomeNovo = '../../OS/' . $_POST['tipo'] . '/' . $equipamento->__get('numero_serie');
+
+        rename($nomeAntigo, $nomeNovo);
 
         header('Location:form_cadastro.php?cadastro=equipamento');
 
