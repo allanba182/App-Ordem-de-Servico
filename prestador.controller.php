@@ -4,12 +4,13 @@
     require '../../app_ordem_servico/prestador.model.php';
     require '../../app_ordem_servico/prestador.service.php';
 
+    $conexao = new Conexao();
+    $prestador = new Prestador();
+
     $acao = isset($_GET['acao'])? $acao = $_GET['acao'] : $acao = $acao;
 
     if($acao == 'inserir')
     {
-        $conexao = new Conexao();
-        $prestador = new Prestador();
 
         $envia_email = isset($_POST['envia_email'])? $envia_email = 'true' : $envia_email = 'false';
         
@@ -26,12 +27,27 @@
 
     if($acao == 'recuperar')
     {
-        $conexao = new Conexao();
-        $prestador = new Prestador();
 
         $prestadorService = new PrestadorService($conexao, $prestador);
         
         $prestadores = $prestadorService->recuperar();
+
+    }
+
+    if($acao == 'atualizar')
+    {
+        $envia_email = isset($_POST['envia_email'])? $envia_email = 'true' : $envia_email = 'false';
+        
+        $prestador->__set('id_prestador', $_POST['id']);
+        $prestador->__set('fantasia', $_POST['fantasia']);
+        $prestador->__set('email', $_POST['email']);
+        $prestador->__set('envia_email', $envia_email);
+
+        $prestadorService = new PrestadorService($conexao, $prestador);
+
+        $prestadorService->atualizar();
+
+        header('Location: form_cadastro.php?cadastro=prestador');
 
     }
 ?>

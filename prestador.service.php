@@ -73,7 +73,30 @@
 
         public function atualizar()
         {
+            $query = 
+            '
+                UPDATE tb_prestador SET fantasia = :fantasia WHERE id_prestador = :id
+            ';
 
+            $stmt = $this->conexao->prepare($query);
+
+            $stmt->bindValue(':fantasia', $this->prestador->__get('fantasia'));
+            $stmt->bindValue(':id', $this->prestador->__get('id_prestador'));
+
+            $stmt->execute();
+
+            $query = 
+            '
+                UPDATE tb_email_prestador SET email = :email, envia_email=:enviar WHERE id_prestador = :id
+            ';
+
+            $stmt = $this->conexao->prepare($query);
+
+            $stmt->bindValue(':email', $this->prestador->__get('email'));
+            $stmt->bindValue(':enviar', $this->prestador->__get('envia_email'));
+            $stmt->bindValue(':id', $this->prestador->__get('id_prestador'));
+
+            $stmt->execute();
         }
 
         public function remover()
