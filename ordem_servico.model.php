@@ -7,6 +7,7 @@
         private $data_garantia;
         private $motivo;
         private $reparos_realizados;
+        private $valor;
         private $anexo;
         private $id_status;
         private $id_equipamento;

@@ -18,11 +18,13 @@
     //REQUERINDO USUARIO
     require '../../app_ordem_servico/usuario.model.php';
 
+    $conexao = new Conexao();
+    $os = new OrdemServico();
+
     $acao = isset($_GET['acao'])? $acao = $_GET['acao'] : $acao = $acao;
 
     if($acao == 'recuperar form')
     {
-        $conexao = new Conexao();
 
         // TIPOS DE EQUIPAMENTO
         $tipo = new TipoEquipamento();
@@ -47,15 +49,14 @@
     {
         session_start();
 
-        $conexao = new Conexao();
-        $ordem_servico = new OrdemServico();
+        $os = new OrdemServico();
 
-        $ordem_servico->__set('motivo',$_POST['motivo']);
-        $ordem_servico->__set('id_equipamento',$_POST['equipamento']);
-        $ordem_servico->__set('id_prestador',$_POST['prestador']);
-        $ordem_servico->__set('id_usuario',$_SESSION['id']);
+        $os->__set('motivo',$_POST['motivo']);
+        $os->__set('id_equipamento',$_POST['equipamento']);
+        $os->__set('id_prestador',$_POST['prestador']);
+        $os->__set('id_usuario',$_SESSION['id']);
         
-        $osService = new OrdemServicoService($conexao, $ordem_servico);
+        $osService = new OrdemServicoService($conexao, $os);
         $osService->inserir();
 
 
@@ -63,7 +64,7 @@
         $prestador = new Prestador();
         $prestadorService = new PrestadorService($conexao, $prestador);
 
-        $prestadores = $prestadorService->recuperarEmail($ordem_servico->__get('id_prestador'));
+        $prestadores = $prestadorService->recuperarEmail($os->__get('id_prestador'));
 
         foreach ($prestadores as $indice => $prestadorOBJ) 
         {
@@ -84,10 +85,8 @@
 
     else if($acao == 'recuperar')
     {
-        $conexao = new Conexao();
-        $ordemServico = new OrdemServico();
 
-        $osService = new OrdemServicoService($conexao, $ordemServico);
+        $osService = new OrdemServicoService($conexao, $os);
 
         /* O.S. PENDENTE */
         $osPendente = $osService->recuperarPendente();
@@ -100,13 +99,12 @@
 
     else if($acao == 'atualizar')
     {
-        $conexao = new Conexao();
-        $os = new OrdemServico();
 
         $os->__set('id_status','2');
         $os->__set('id_os',$_POST['id_os']);
         $os->__set('data_garantia',$_POST['data_garantia']);
         $os->__set('reparos_realizados',$_POST['reparos_realizados']);
+        $os->__set('valor', $_POST['valor']);
 
         
         $arquivo = $_FILES['anexo']['size'] > 0? $_FILES['anexo'] : FALSE;

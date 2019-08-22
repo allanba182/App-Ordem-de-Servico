@@ -56,6 +56,7 @@ create table tb_os
     data_garantia DATETIME DEFAULT NULL,
     motivo TEXT NOT NULL,
     reparos_realizados TEXT DEFAULT NULL,
+    valor VARCHAR(10) DEFAULT NULL,
     anexo VARCHAR(100) DEFAULT NULL,
     id_status int NOT NULL DEFAULT 1,
     FOREIGN KEY(id_status) REFERENCES tb_status(id_status),
