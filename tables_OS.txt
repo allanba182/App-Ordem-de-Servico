@@ -19,7 +19,8 @@ create table tb_tipo_equipamento
 create table tb_equipamento
 (
     id_equipamento INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    numero_serie VARCHAR(30) NOT NULL,
+    nome VARCHAR (50) NOT NULL,
+    numero_serie VARCHAR(50) NOT NULL,
     id_tipo INT NOT NULL,
     FOREIGN KEY (id_tipo) REFERENCES tb_tipo_equipamento(id_tipo)
     

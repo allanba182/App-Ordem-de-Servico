@@ -3,6 +3,7 @@
     class Equipamento
     {
         private $id_equipamento;
+        private $nome;
         private $numero_serie;
         private $id_tipo;
 

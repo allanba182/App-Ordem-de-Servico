@@ -17,13 +17,14 @@
     if( $acao == 'inserir')
     {
 
+        $equipamento->__set('nome', $_POST['nome']);
         $equipamento->__set('numero_serie', $_POST['serie']);
         $equipamento->__set('id_tipo', $_POST['tipo']);
 
         $equipamentoService = new EquipamentoService($conexao, $equipamento);
         $equipamentoService->inserir();
 
-        //RECUPERANDO TIPO EQUIPAMENTO
+        //RECUPERANDO TIPO EQUIPAMENTO PARA CRIAÇÃO DA PASTA
         $tipo_equipamento = new TipoEquipamento();
         $tipo_equipamentoService = new TipoEquipamentoService($conexao, $tipo_equipamento);
         $tipoEquipamento = $tipo_equipamentoService->recuperar();

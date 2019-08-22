@@ -15,11 +15,12 @@
         {
             $query =
             '
-                insert into tb_equipamento (numero_serie,id_tipo) values (:serie,:tipo)
+                insert into tb_equipamento (nome,numero_serie,id_tipo) values (:nome,:serie,:tipo)
             ';
 
             $stmt = $this->conexao->prepare($query);
 
+            $stmt->bindValue(':nome', $this->equipamento->__get('nome'));
             $stmt->bindValue(':serie', $this->equipamento->__get('numero_serie'));
             $stmt->bindValue(':tipo', $this->equipamento->__get('id_tipo'));
 
@@ -31,7 +32,7 @@
         {
             $query =
             '
-                SELECT E.id_equipamento, E.numero_serie, T.tipo 
+                SELECT E.id_equipamento, E.nome, E.numero_serie, T.tipo 
                 FROM  tb_equipamento E
                 LEFT JOIN tb_tipo_equipamento T ON (E.id_tipo = T.id_tipo)
             ';
