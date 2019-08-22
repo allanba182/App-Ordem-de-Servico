@@ -4,6 +4,9 @@
     require '../../app_ordem_servico/usuario.model.php';
     require '../../app_ordem_servico/usuario.service.php';
 
+    $conexao = new Conexao();
+    $usuario = new Usuario();
+
     $acao = isset($_GET["acao"])? $acao = $_GET["acao"] : $acao = $acao;
     
 
@@ -11,8 +14,6 @@
     {
         session_start();
         $autenticado = false;
-        $conexao = new Conexao();
-        $usuario = new Usuario();
 
         $usuarioService = new UsuarioService($conexao, $usuario);
         $usuarios = $usuarioService->recuperar();
@@ -46,8 +47,6 @@
 
     else if($acao == 'inserir')
     {
-        $conexao = new Conexao();
-        $usuario = new Usuario();
 
         $usuario->__set('nome', $_POST['nome']);
         $usuario->__set('email', $_POST['email']);
@@ -68,6 +67,22 @@
 
         $usuarioService = new UsuarioService($conexao, $usuario);
         $usuarios = $usuarioService->recuperar();
+    }
+
+    else if($acao == 'atualizar')
+    {
+        $usuario->__set('id_usuario', $_POST['id']);
+        $usuario->__set('nome', $_POST['nome']);
+        $usuario->__set('email', $_POST['email']);
+        $usuario->__set('usuario', $_POST['usuario']);
+        $usuario->__set('senha', $_POST['senha']);
+
+        $usuarioService = new UsuarioService($conexao, $usuario);
+        $usuarioService->atualizar();
+
+        header('Location: form_cadastro.php?cadastro=usuario');
+
+
     }
 
 ?>

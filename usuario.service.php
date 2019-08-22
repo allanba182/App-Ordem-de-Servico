@@ -45,7 +45,26 @@
 
         public function atualizar()
         {
+            $query =
+            '
+                UPDATE tb_usuario SET
+                nome = :nome,
+                email = :email,
+                usuario = :usuario,
+                senha = :senha
+                WHERE id_usuario = :id
 
+            ';
+
+            $stmt = $this->conexao->prepare($query);
+
+            $stmt->bindValue(':nome', $this->usuario->__get('nome'));
+            $stmt->bindValue(':email', $this->usuario->__get('email'));
+            $stmt->bindValue(':usuario', $this->usuario->__get('usuario'));
+            $stmt->bindValue(':senha', $this->usuario->__get('senha'));
+            $stmt->bindValue(':id', $this->usuario->__get('id_usuario'));
+
+            $stmt->execute();
         }
 
         public function remover()
