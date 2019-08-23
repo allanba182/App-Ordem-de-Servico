@@ -112,7 +112,7 @@
         if($arquivo)
         {
             /* Alterando o nome do arquivo */
-            $arquivo['name'] = 'OS_' . $_POST['id_os'] . '_' . $_POST['data_abertura'];
+            $arquivo['name'] = 'OS_' . $_POST['id_os'] . '_' . $_POST['data_abertura'] . '.pdf';
             
             //Diretório onde o arquivo vai ser salvo
             $diretorio = '../../OS/' . $_POST['tipo'] . '/' . $_POST['serie'] . '/';
