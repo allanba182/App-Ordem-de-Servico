@@ -78,7 +78,7 @@
 
         //INSTANCIANDO EMAIL
         $email = new Mensagem($prestador, $usuario);
-        $email->enviarEmail();
+        //$email->enviarEmail();
         
         header('Location: abrir_os.php?inclusao=1');
     }

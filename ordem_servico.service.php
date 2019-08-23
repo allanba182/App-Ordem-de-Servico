@@ -57,7 +57,7 @@
             
             $query =
             "
-                SELECT O.id_os, CAST(O.data_abertura AS DATE) AS 'data_abertura', CAST(O.data_garantia AS DATE) AS 'data_garantia', O.motivo,E.nome AS 'nome_equipamento', E.numero_serie, T.tipo, P.fantasia, U.nome
+                SELECT O.id_os, CAST(O.data_abertura AS DATE) AS 'data_abertura', CAST(O.data_garantia AS DATE) AS 'data_garantia', O.motivo, O.reparos_realizados, O.valor, O.anexo, E.nome AS 'nome_equipamento', E.numero_serie, T.tipo, P.fantasia, U.nome
                 FROM tb_os O 
                 LEFT JOIN tb_status S ON (O.id_status = S.id_status)
                 LEFT JOIN tb_equipamento E ON (O.id_equipamento = E.id_equipamento)
