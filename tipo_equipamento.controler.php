@@ -11,13 +11,18 @@
 
     if( $acao == 'inserir')
     {
+        $_UP['pasta'] = './OS';
+        
+        mkdir($_UP['pasta'], 0777,true);
+        chmod($_UP['pasta'], 0777);
+
         $tipoEquipamento->__set('tipo',$_POST['tipo']);
 
         $tipoEquipamentoService = new TipoEquipamentoService($conexao,$tipoEquipamento);
         $tipoEquipamentoService->inserir();
 
         //CRIANDO PASTA REFERENTE AO TIPO CADASTRADO NO BANCO
-        $_UP['pasta'] = '../../OS/' . $tipoEquipamento->__get('tipo') . '/';
+        $_UP['pasta'] = './OS/' . $tipoEquipamento->__get('tipo') . '/';
         mkdir($_UP['pasta'], 0777,true);
         chmod($_UP['pasta'], 0777);
 
@@ -44,8 +49,8 @@
         $tipoEquipamentoService->atualizar();
 
         /* ATUALIZAÇÃO DO DIRETORIO */
-        $nomeAntigo = '../../OS/' . $_POST['tipo_antigo'];
-        $nomeNovo = '../../OS/' . $tipoEquipamento->__get('tipo');
+        $nomeAntigo = './OS/' . $_POST['tipo_antigo'];
+        $nomeNovo = './OS/' . $tipoEquipamento->__get('tipo');
 
         rename($nomeAntigo, $nomeNovo);
 
