@@ -115,7 +115,7 @@
             $arquivo['name'] = 'OS_' . $_POST['id_os'] . '_' . $_POST['data_abertura'] . '.pdf';
             
             //Diretório onde o arquivo vai ser salvo
-            $diretorio = '../../OS/' . $_POST['tipo'] . '/' . $_POST['serie'] . '/';
+            $diretorio = './OS/' . $_POST['tipo'] . '/' . $_POST['serie'] . '/';
 
             //MOVE O ARQUIVO PARA O DIRETORIO
             move_uploaded_file($arquivo['tmp_name'], $diretorio.$arquivo['name']);
