@@ -15,7 +15,7 @@
         {
             $query =
             '
-                insert into tb_equipamento (nome,numero_serie,id_tipo) values (:nome,:serie,:tipo)
+                INSERT INTO tb_equipamento (nome,numero_serie,id_tipo) VALUES (:nome,:serie,:tipo)
             ';
 
             $stmt = $this->conexao->prepare($query);

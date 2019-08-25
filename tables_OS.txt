@@ -1,10 +1,22 @@
+create table tb_status(
+	id_status int not null primary key auto_increment,
+    status varchar(25) not null
+);
+
+insert into tb_status(status)values('Ativo');
+insert into tb_status(status)values('Inativo');
+insert into tb_status(status)values('Pendente');
+insert into tb_status(status)values('Concluido');
+
 create table tb_usuario 
 (
     id_usuario INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     usuario VARCHAR(50) NOT NULL,
-    senha VARCHAR(10) NOT NULL
+    senha VARCHAR(10) NOT NULL,
+    id_status INT DEFAULT 1,
+    FOREIGN KEY (id_status) REFERENCES tb_status(id_status)
 );
 
 insert into tb_usuario (nome,email,usuario,senha) values ("Administrator","suporte@sanmichelnet.com.br","administrator","1234");
@@ -13,7 +25,9 @@ insert into tb_usuario (nome,email,usuario,senha) values ("Administrator","supor
 create table tb_tipo_equipamento
 (
     id_tipo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    tipo VARCHAR (50) NOT NULL
+    tipo VARCHAR (50) NOT NULL,
+    id_status INT DEFAULT 1,
+    FOREIGN KEY (id_status) REFERENCES tb_status(id_status)
 );
 
 create table tb_equipamento
@@ -22,32 +36,27 @@ create table tb_equipamento
     nome VARCHAR (50) NOT NULL,
     numero_serie VARCHAR(50) NOT NULL,
     id_tipo INT NOT NULL,
-    FOREIGN KEY (id_tipo) REFERENCES tb_tipo_equipamento(id_tipo)
+    FOREIGN KEY (id_tipo) REFERENCES tb_tipo_equipamento(id_tipo),
+    id_status INT DEFAULT 1,
+    FOREIGN KEY (id_status) REFERENCES tb_status(id_status)
     
 );
 
 create table tb_prestador
 (
     id_prestador INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    fantasia VARCHAR(50) NOT NULL
+    fantasia VARCHAR(50) NOT NULL,
+    id_status INT DEFAULT 1,
+    FOREIGN KEY (id_status) REFERENCES tb_status(id_status)
 );
 
 create table tb_email_prestador
 (
     id_email INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(100) NOT NULL,
-    envia_email VARCHAR(5) NOT NULL,
-    id_prestador INT NOT NULL,
-    FOREIGN KEY (id_prestador) REFERENCES tb_prestador(id_prestador)
+    id_status INT DEFAULT 1,
+    FOREIGN KEY (id_status) REFERENCES tb_status(id_status)
 );
-
-create table tb_status(
-	id_status int not null primary key auto_increment,
-    status varchar(25) not null
-);
-
-insert into tb_status(status)values('Pendente');
-insert into tb_status(status)values('Concluido');
 
 create table tb_os
 (
