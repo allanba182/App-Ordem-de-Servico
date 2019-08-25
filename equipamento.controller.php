@@ -36,7 +36,7 @@
         }
         
         //CRIANDO PASTA REFERENTE AO TIPO CADASTRADO NO BANCO
-        $_UP['pasta'] = '../../OS/' . $tipo_equipamento->__get('tipo') . '/' . $equipamento->__get('numero_serie') . '/';
+        $_UP['pasta'] = './OS/' . $tipo_equipamento->__get('tipo') . '/' . $equipamento->__get('numero_serie') . '/';
         mkdir($_UP['pasta'], 0777,true);
         chmod($_UP['pasta'], 0777);
 
@@ -66,8 +66,8 @@
         $equipamentoService->atualizar();
 
         /* ATUALIZAÇÃO DO DIRETORIO */
-        $nomeAntigo = '../../OS/' . $_POST['tipo'] . '/' . $_POST['numero_serie_antigo'];
-        $nomeNovo = '../../OS/' . $_POST['tipo'] . '/' . $equipamento->__get('numero_serie');
+        $nomeAntigo = './OS/' . $_POST['tipo'] . '/' . $_POST['numero_serie_antigo'];
+        $nomeNovo = './OS/' . $_POST['tipo'] . '/' . $equipamento->__get('numero_serie');
 
         rename($nomeAntigo, $nomeNovo);
 
