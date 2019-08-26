@@ -54,6 +54,8 @@ create table tb_email_prestador
 (
     id_email INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(100) NOT NULL,
+    id_prestador INT NOT NULL,
+    FOREIGN KEY (id_prestador) REFERENCES tb_prestador(id_prestador),
     id_status INT DEFAULT 1,
     FOREIGN KEY (id_status) REFERENCES tb_status(id_status)
 );

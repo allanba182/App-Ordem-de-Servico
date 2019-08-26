@@ -27,7 +27,7 @@
             
             $query =
             "
-                insert into tb_email_prestador(email,envia_email,id_prestador) values (:email,:enviar,:id)
+                insert into tb_email_prestador(email,id_status,id_prestador) values (:email,:enviar,:id)
             ";
 
             $stmt = $this->conexao->prepare($query);
@@ -44,9 +44,10 @@
         {
             $query =
             '
-                SELECT P.id_prestador, P.fantasia , E.id_email, E.email, E.envia_email
+                SELECT P.id_prestador, P.fantasia , E.id_email, E.email, S.status
                 FROM tb_prestador P
                 LEFT JOIN tb_email_prestador E ON (P.id_prestador = E.id_prestador)
+                LEFT JOIN tb_status S ON (E.id_status = S.id_status)
             ';
 
             $stmt = $this->conexao->prepare($query);
@@ -87,7 +88,7 @@
 
             $query = 
             '
-                UPDATE tb_email_prestador SET email = :email, envia_email=:enviar WHERE id_prestador = :id
+                UPDATE tb_email_prestador SET email = :email, id_status=:enviar WHERE id_prestador = :id
             ';
 
             $stmt = $this->conexao->prepare($query);

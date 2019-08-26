@@ -12,7 +12,7 @@
     if($acao == 'inserir')
     {
 
-        $envia_email = isset($_POST['envia_email'])? $envia_email = 'true' : $envia_email = 'false';
+        $envia_email = isset($_POST['envia_email'])? $envia_email = 1 : $envia_email = 2;
         
         $prestador->__set('fantasia', $_POST['fantasia']);
         $prestador->__set('email', $_POST['email']);
@@ -36,7 +36,7 @@
 
     if($acao == 'atualizar')
     {
-        $envia_email = isset($_POST['envia_email'])? $envia_email = 'true' : $envia_email = 'false';
+        $envia_email = isset($_POST['envia_email'])? $envia_email = 1 : $envia_email = 2;
         
         $prestador->__set('id_prestador', $_POST['id']);
         $prestador->__set('fantasia', $_POST['fantasia']);
