@@ -150,6 +150,11 @@
 
     else if ($acao == 'remover')
     {
-        print_r($_POST);
+        $os->__set('id_os', $_GET['id']);
+
+        $osService = new OrdemServicoService($conexao, $os);
+        $osService->remover();
+
+        header('Location: home.php');
     }
 ?>

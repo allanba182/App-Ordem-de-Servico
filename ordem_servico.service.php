@@ -117,6 +117,14 @@
 
         public function remover()
         {
+            $query = 
+            '
+                DELETE FROM tb_os WHERE id_os = :id
+            ';
+
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':id', $this->ordem_servico->__get('id_os'));
+            $stmt->execute();
             
         }
     }
