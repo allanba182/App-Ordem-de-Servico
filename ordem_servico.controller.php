@@ -100,7 +100,7 @@
     else if($acao == 'atualizar')
     {
 
-        $os->__set('id_status','2');
+        $os->__set('id_status','4');
         $os->__set('id_os',$_POST['id_os']);
         $os->__set('data_garantia',$_POST['data_garantia']);
         $os->__set('reparos_realizados',$_POST['reparos_realizados']);
@@ -133,5 +133,23 @@
 
         header('Location: home.php');
             
+    }
+
+    else if($acao == 'reabrir')
+    {
+
+        $os->__set('id_status','3');
+        $os->__set('id_os',$_POST['id_os']);
+
+
+        $osService = new OrdemServicoService($conexao, $os);
+        $osService->atualizarId();
+
+        header('Location: home.php');        
+    }
+
+    else if ($acao == 'remover')
+    {
+        print_r($_POST);
     }
 ?>

@@ -33,14 +33,14 @@
             
             $query =
             "
-                SELECT O.id_os, CAST(O.data_abertura AS DATE) AS 'data_abertura', CAST(O.data_garantia AS DATE) AS 'data_garantia', O.motivo,E.nome AS 'nome_equipamento',  E.numero_serie, T.tipo, P.fantasia, U.nome
+            SELECT O.id_os, CAST(O.data_abertura AS DATE) AS 'data_abertura', CAST(O.data_garantia AS DATE) AS 'data_garantia', O.motivo, O.reparos_realizados, O.valor, O.anexo, E.nome AS 'nome_equipamento', E.numero_serie, T.tipo, P.fantasia, U.nome
                 FROM tb_os O 
                 LEFT JOIN tb_status S ON (O.id_status = S.id_status)
                 LEFT JOIN tb_equipamento E ON (O.id_equipamento = E.id_equipamento)
                 LEFT JOIN tb_tipo_equipamento T ON (E.id_tipo = T.id_tipo)
                 LEFT JOIN tb_prestador P ON (O.id_prestador = P.id_prestador)
                 LEFT JOIN tb_usuario U ON (O.id_usuario = U.id_usuario)
-                WHERE O.id_status = 1
+                WHERE O.id_status = 3
             ";
             
 
@@ -65,6 +65,7 @@
                 LEFT JOIN tb_prestador P ON (O.id_prestador = P.id_prestador)
                 LEFT JOIN tb_usuario U ON (O.id_usuario = U.id_usuario)
                 WHERE O.data_garantia >= CURDATE()
+                AND O.status = 3
             ";
             
 
@@ -89,6 +90,23 @@
             $stmt->bindValue(':reparos', $this->ordem_servico->__get('reparos_realizados'));
             $stmt->bindValue(':valor', $this->ordem_servico->__get('valor'));
             $stmt->bindValue(':anexo', $this->ordem_servico->__get('anexo'));
+            $stmt->bindValue(':id_status', $this->ordem_servico->__get('id_status'));
+            $stmt->bindValue(':os', $this->ordem_servico->__get('id_os'));
+
+            
+            $stmt->execute();
+
+        }
+
+        public function atualizarId()
+        {
+            $query = 
+            "
+                UPDATE tb_os SET id_status = :id_status WHERE id_os = :os
+            ";
+
+            $stmt = $this->conexao->prepare($query);
+
             $stmt->bindValue(':id_status', $this->ordem_servico->__get('id_status'));
             $stmt->bindValue(':os', $this->ordem_servico->__get('id_os'));
 
