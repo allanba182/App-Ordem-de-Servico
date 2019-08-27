@@ -75,4 +75,15 @@
 
     }
 
+    else if ( $acao == 'remover')
+    {
+        $equipamento->__set('id_equipamento', $_GET['id']);
+        $equipamento->__set('id_status', '2');
+
+        $equipamentoService = new EquipamentoService($conexao, $equipamento);
+        $equipamentoService->remover();
+
+        header('Location: form_cadastro.php?cadastro=equipamento');
+    }
+
 ?>

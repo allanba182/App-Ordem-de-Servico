@@ -6,6 +6,7 @@
         private $nome;
         private $numero_serie;
         private $id_tipo;
+        private $id_status;
 
         public function __get($atributo)
         {
