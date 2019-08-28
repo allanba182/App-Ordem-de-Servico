@@ -6,6 +6,7 @@
         private $fantasia;
         private $email;
         private $envia_email;
+        private $id_status;
 
         public function __get($atributo)
         {

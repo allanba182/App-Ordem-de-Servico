@@ -48,6 +48,7 @@
                 FROM tb_prestador P
                 LEFT JOIN tb_email_prestador E ON (P.id_prestador = E.id_prestador)
                 LEFT JOIN tb_status S ON (E.id_status = S.id_status)
+                WHERE P.id_status = 1
             ';
 
             $stmt = $this->conexao->prepare($query);
@@ -102,7 +103,15 @@
 
         public function remover()
         {
+            $query = 
+            '
+                UPDATE tb_prestador SET id_status = :status WHERE id_prestador = :id
+            ';
 
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':status', $this->prestador->__get('id_status'));
+            $stmt->bindValue(':id', $this->prestador->__get('id_prestador'));
+            $stmt->execute();
         }
     }
 

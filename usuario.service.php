@@ -33,7 +33,7 @@
         {
             $query = 
             '
-                SELECT * FROM tb_usuario
+                SELECT * FROM tb_usuario WHERE id_status = 1
             ';
         
             $stmt = $this->conexao->prepare($query);
@@ -69,7 +69,15 @@
 
         public function remover()
         {
+            $query =
+            '
+                UPDATE tb_usuario SET id_status = :status WHERE id_usuario = :id
+            ';
 
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':status', $this->usuario->__get('id_status'));
+            $stmt->bindValue(':id', $this->usuario->__get('id_usuario'));
+            $stmt->execute();
         }
         
     }

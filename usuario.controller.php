@@ -10,7 +10,7 @@
     $acao = isset($_GET["acao"])? $acao = $_GET["acao"] : $acao = $acao;
     
 
-    if($acao == "logar")
+    if( $acao == "logar")
     {
         session_start();
         $autenticado = false;
@@ -45,7 +45,7 @@
         
     }
 
-    else if($acao == 'inserir')
+    else if( $acao == 'inserir')
     {
 
         $usuario->__set('nome', $_POST['nome']);
@@ -60,7 +60,7 @@
 
     }
 
-    else if($acao == 'recuperar')
+    else if( $acao == 'recuperar')
     {
         $conexao = new Conexao();
         $usuario = new Usuario();
@@ -69,7 +69,7 @@
         $usuarios = $usuarioService->recuperar();
     }
 
-    else if($acao == 'atualizar')
+    else if( $acao == 'atualizar')
     {
         $usuario->__set('id_usuario', $_POST['id']);
         $usuario->__set('nome', $_POST['nome']);
@@ -82,6 +82,17 @@
 
         header('Location: form_cadastro.php?cadastro=usuario');
 
+    }
+
+    else if ( $acao == 'remover')
+    {
+        $usuario->__set('id_usuario', $_GET['id']);
+        $usuario->__set('id_status', 2);
+
+        $usuarioService = new UsuarioService($conexao, $usuario);
+        $usuarioService->remover();
+
+        header('Location: form_cadastro.php?cadastro=usuario ');
     }
 
 ?>

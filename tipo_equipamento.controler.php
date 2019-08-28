@@ -30,7 +30,7 @@
         header('Location: form_cadastro.php?cadastro=tipo&inclusao=1');
     }
 
-    if( $acao == 'recuperar')
+    else if( $acao == 'recuperar')
     {
 
         $tipoEquipamentoService = new TipoEquipamentoService($conexao, $tipoEquipamento);
@@ -39,7 +39,7 @@
 
     }
 
-    if( $acao == 'atualizar')
+    else if( $acao == 'atualizar')
     {
         $tipoEquipamento->__set('id_tipo',$_POST['id']);
         $tipoEquipamento->__set('tipo',$_POST['tipo']);
@@ -57,5 +57,15 @@
         header('Location: form_cadastro.php?cadastro=tipo');
     }
 
+    else if ( $acao == 'remover')
+    {
+        $tipoEquipamento->__set('id_tipo', $_GET['id']);
+        $tipoEquipamento->__set('id_status', 2);
+
+        $tipoEquipamentoService = new TipoEquipamentoService($conexao, $tipoEquipamento);
+        $tipoEquipamentoService->remover();
+
+        header('Location: form_cadastro.php?cadastro=tipo ');
+    }
 
 ?>

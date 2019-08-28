@@ -29,7 +29,7 @@
         {
             $query = 
             '
-                select * from tb_tipo_equipamento
+                SELECT * FROM tb_tipo_equipamento WHERE id_status = 1
             ';
 
             $stmt = $this->conexao->prepare($query);
@@ -55,7 +55,15 @@
 
         public function remover()
         {
+            $query = 
+            '
+                UPDATE tb_tipo_equipamento SET id_status = :status WHERE id_tipo = :id
+            ';
 
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':status', $this->tipoEquipamento->__get('id_status'));
+            $stmt->bindValue(':id', $this->tipoEquipamento->__get('id_tipo'));
+            $stmt->execute();
         }
     }
 ?>

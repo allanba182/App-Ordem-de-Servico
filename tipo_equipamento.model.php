@@ -4,6 +4,7 @@
     {
         private $id_tipo;
         private $tipo;
+        private $id_status;
 
         public function __get($atributo)
         {

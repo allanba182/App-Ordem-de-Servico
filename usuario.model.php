@@ -7,6 +7,7 @@
         private $email;
         private $usuario;
         private $senha;
+        private $id_status;
 
         public function __get($atributo)
         {
