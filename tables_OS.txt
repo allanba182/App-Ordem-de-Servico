@@ -69,7 +69,7 @@ create table tb_os
     reparos_realizados TEXT DEFAULT NULL,
     valor VARCHAR(10) DEFAULT NULL,
     anexo VARCHAR(100) DEFAULT NULL,
-    id_status int NOT NULL DEFAULT 1,
+    id_status int NOT NULL DEFAULT 3,
     FOREIGN KEY(id_status) REFERENCES tb_status(id_status),
     id_equipamento INT NOT NULL,
     FOREIGN KEY (id_equipamento) REFERENCES tb_equipamento(id_equipamento),
