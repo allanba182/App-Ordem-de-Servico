@@ -1,6 +1,6 @@
 <?php
 
-    require_once '../../app_ordem_servico/includes.php';
+    require '../../app_ordem_servico/includes.php';
 
     $usuario = new Usuario();
     
