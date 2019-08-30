@@ -1,27 +1,8 @@
 <?php
 
-    require '../../app_ordem_servico/conexao.php';
-    require '../../app_ordem_servico/ordem_servico.service.php';
-    require '../../app_ordem_servico/ordem_servico.model.php';
-    // REQUERINDO PRESTADOR
-    require '../../app_ordem_servico/prestador.model.php';
-    require '../../app_ordem_servico/prestador.service.php';
-    // REQUERINDO TIPO EQUIPAMENTO
-    require '../../app_ordem_servico/tipo_equipamento.model.php';
-    require '../../app_ordem_servico/tipo_equipamento.service.php';
-    // REQUERINDO EQUIPAMENTO
-    require '../../app_ordem_servico/equipamento.model.php';
-    require '../../app_ordem_servico/equipamento.service.php';
-    //REQUERINDO MENSAGEM
-    require '../../app_ordem_servico/mensagem.php';
+    require_once '../../app_ordem_servico/includes.php';
 
-    //REQUERINDO USUARIO
-    require '../../app_ordem_servico/usuario.model.php';
-
-    $conexao = new Conexao();
     $os = new OrdemServico();
-
-    $acao = isset($_GET['acao'])? $acao = $_GET['acao'] : $acao = $acao;
 
     if($acao == 'recuperar form')
     {

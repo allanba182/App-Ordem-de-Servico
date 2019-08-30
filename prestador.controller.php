@@ -1,13 +1,8 @@
 <?php
 
-    require '../../app_ordem_servico/conexao.php';
-    require '../../app_ordem_servico/prestador.model.php';
-    require '../../app_ordem_servico/prestador.service.php';
+    require_once '../../app_ordem_servico/includes.php';
 
-    $conexao = new Conexao();
     $prestador = new Prestador();
-
-    $acao = isset($_GET['acao'])? $acao = $_GET['acao'] : $acao = $acao;
 
     if( $acao == 'inserir' )
     {

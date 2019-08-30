@@ -1,15 +1,9 @@
 <?php
 
-    require '../../app_ordem_servico/conexao.php';
-    require '../../app_ordem_servico/usuario.model.php';
-    require '../../app_ordem_servico/usuario.service.php';
+    require_once '../../app_ordem_servico/includes.php';
 
-    $conexao = new Conexao();
     $usuario = new Usuario();
-
-    $acao = isset($_GET["acao"])? $acao = $_GET["acao"] : $acao = $acao;
     
-
     if( $acao == "logar")
     {
         session_start();

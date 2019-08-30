@@ -1,18 +1,8 @@
 <?php
 
-    $path = '../../app_ordem_servico/';
-    require '../../app_ordem_servico/conexao.php';
+    require_once '../../app_ordem_servico/includes.php';
 
-    require '../../app_ordem_servico/equipamento.model.php';
-    require '../../app_ordem_servico/equipamento.service.php';
-
-    require '../../app_ordem_servico/tipo_equipamento.model.php';
-    require '../../app_ordem_servico/tipo_equipamento.service.php';
-    
-    $conexao = new Conexao();
     $equipamento = new Equipamento();
-
-    $acao = isset($_GET['acao'])? $acao = $_GET['acao'] : $acao = $acao;
 
     if( $acao == 'inserir')
     {
