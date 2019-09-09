@@ -5,10 +5,12 @@
         private $id_os;
         private $data_abertura;
         private $data_garantia;
-        private $motivo;
+        private $problema;
         private $reparos_realizados;
         private $valor;
         private $anexo;
+        private $observacao;
+        private $id_motivo;
         private $id_status;
         private $id_equipamento;
         private $id_prestador;

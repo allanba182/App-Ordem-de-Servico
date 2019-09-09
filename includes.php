@@ -28,6 +28,11 @@
     require_once $path . 'usuario.model.php';
     require_once $path . 'usuario.service.php';
 
+    //REQUERINDO MOTIVO
+    require_once $path . 'motivo.model.php';
+    require_once $path . 'motivo.service.php';
+
+
     // CRIANDO UMA ACAO
     $acao = isset($_GET['acao'])? $acao = $_GET['acao'] : $acao = $acao;
 

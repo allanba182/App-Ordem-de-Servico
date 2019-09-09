@@ -59,6 +59,24 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
+        public function recuperarPorId()
+        {
+            $query =
+            '
+                SELECT E.id_equipamento, E.nome, E.numero_serie, T.tipo 
+                FROM tb_equipamento E
+                LEFT JOIN tb_tipo_equipamento T ON (E.id_tipo = T.id_tipo)
+                WHERE id_equipamento = :id
+            ';
+
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':id', $this->equipamento->__get('id_equipamento'));
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
+
         public function atualizar()
         {
             $query = 
