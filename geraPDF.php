@@ -14,7 +14,7 @@
 	$html .= '<br><br>';
 	$html .= '<label style="font-weight: bold;">Motivo:</label> ' . $os[0]->motivo ;
 	$html .= '<br><br>';
-	$html .= '<label style="font-weight: bold;">Observação:</label> ' . $_POST['observacao'] ;
+	$html .= '<label style="font-weight: bold;">Observação:</label> ' . $os[0]->observacao ;
 	$html .= '<br><br><hr> ';
 	$html .= '<div style="text-align: center; margin-top: 150px;">';
 	$html .= '____________________________';

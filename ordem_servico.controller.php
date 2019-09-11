@@ -100,22 +100,33 @@
         $os->__set('reparos_realizados',$_POST['reparos_realizados']);
         $os->__set('valor', $_POST['valor']);
 
+        $data = str_replace('/','',$_POST['data_abertura']);
+
         /* Alterando o nome do arquivo */
-        $arquivo['name'] = 'OS_' . $_POST['id_os'] . '_' . $_POST['data_abertura'] . '.pdf';
+        $arquivo = 'OS_' . $_POST['id_os'] . '_' . $data . '.pdf';
         
         //Diretório onde o arquivo vai ser salvo
         $diretorio = './OS/' . $_POST['tipo'] . '/' . $_POST['serie'] . '/';
 
+        echo '<pre>';
+        print_r($_FILES['anexo']);
+        echo '</pre>';
+
         //MOVE O ARQUIVO PARA O DIRETORIO
-        move_uploaded_file($arquivo['tmp_name'], $diretorio.$arquivo['name']);
+        if( move_uploaded_file($_FILES['anexo']['tmp_name'], $diretorio.$arquivo) )
+        {
+            $os->__set('anexo',$arquivo);        
 
-        $os->__set('anexo',$arquivo['name']);        
+            $osService = new OrdemServicoService($conexao,$os);
+            $osService->atualizar();
 
-        $osService = new OrdemServicoService($conexao,$os);
-        $osService->atualizar();
-
-        header('Location: home.php');
-            
+            header('Location: home.php');
+        }
+        else
+        {
+            print_r($diretorio.$arquivo);
+            //header('Location: home.php?log=erro');
+        }
     }
 
     else if( $acao == 'reabrir')
